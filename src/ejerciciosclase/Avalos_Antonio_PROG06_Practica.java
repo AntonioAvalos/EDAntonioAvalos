@@ -177,6 +177,8 @@ public class Avalos_Antonio_PROG06_Practica {
     }
 
     /**
+     * Función que permite seleccionar un número de rondas entre las únicas posibles.
+     * 
      * 
      * @return 
      */
@@ -206,6 +208,9 @@ public class Avalos_Antonio_PROG06_Practica {
     }
 
     /**
+     * 
+     * Función que permite crear un array con el mismo tamaño que el número de jugadores
+     * y permite introducir un nombre a cada uno.
      * 
      * @param njug
      * @return 
@@ -245,6 +250,8 @@ public class Avalos_Antonio_PROG06_Practica {
 
     /**
      * 
+     * Función que permite seleccionar un número de jugadores correcto.
+     * 
      * @param entrada
      * @return 
      */
@@ -268,6 +275,9 @@ public class Avalos_Antonio_PROG06_Practica {
           
           
        /**
+        * 
+        * Función que permite crear la estructura de la operación matemática dependiendo
+        * del random que haya salido. 
         * 
         * @return 
         */         
