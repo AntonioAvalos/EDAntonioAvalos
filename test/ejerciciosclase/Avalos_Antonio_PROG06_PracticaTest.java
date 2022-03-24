@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Antonio Ávalos Camuñas
+ * @author Antonio Ávalos Camuñas.
  */
 public class Avalos_Antonio_PROG06_PracticaTest {
     
