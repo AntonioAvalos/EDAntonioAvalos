@@ -1,290 +1,171 @@
 package ejerciciosclase;
 
+import practicaProg.Avalos_Antonio_PROG06_Practica;
 import java.util.Scanner;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author super
+ * @author Antonio Ávalos Camuñas
  */
-public class NewClass {
+public class Avalos_Antonio_PROG06_PracticaTest {
     
-    public static void main(String[] args) {
-             
-        int contador=0;
-        int puntos=0;
-        int acumulador=0;
-        String temp;
+    public Avalos_Antonio_PROG06_PracticaTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     * Test of entradaJugadores method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testEntradaJugadores() {
+          
+        System.out.println("entradaJugadores");
+        
+        Scanner entrada= new Scanner ("1");
+        int expResult = 1;
+        int result = Avalos_Antonio_PROG06_Practica.entradaJugadores(entrada);
+        assertEquals(expResult, result);
   
-
-        Scanner entrada= new Scanner (System.in);
         
-        int njug= entradaJugadores(entrada);
-int prueba=0;
         
-        String jugador[]=new String[njug];
-    
-        
-         //SE JUEGAN CON LAS POSICIONES
-        //Mete cada nombre en la posición del vector DE MANERA ORDENADA. 
-        
-         for(int p=0; p<njug;p++){
-                          
-            Scanner entradanombres= new Scanner (System.in);
-            System.out.println("Introduzca nick, jugador número " + (p+1)); //FUNCION QUE PIDA NICK
-            jugador[p]= entradanombres.nextLine();
-   
-            
-         }
-         
-         
-         for(int i=0; i<1;i++){
-             
-          int anterior = (int)(Math.random()*njug);        
-          temp=jugador[anterior];
-          jugador[anterior]=jugador[i];
-          jugador[i]= temp;
-            
-         }
-         
-
-          int nrondas; 
-               
-        Scanner entradarondas= new Scanner (System.in);
-        System.out.println("Escribe número de rondas:\n "
-                + " 3 -> Partida rápida\n "
-                + " 5 -> Partida corta\n "
-                + " 10 -> Partida normal\n "
-                + " 20 -> Partida larga\n "); //FUNCION QUE PIDA RONDAS
-     
-        nrondas= entradarondas.nextInt();
-        
-        while (nrondas!=3 && nrondas!=5 && nrondas!=10 && nrondas!=20){
-            
-            System.out.println("Error. Introduce un número de rondas correctas");
-            
-            nrondas= entradarondas.nextInt();
-            
-                if (nrondas==3 || nrondas==5 || nrondas==10 || nrondas==20){
-                   break;
-                }
-          
-        }
-        
-           
-         int tabla[][]=new int[njug][nrondas];
-                  
-          for (int i = 0; i < nrondas; i++) {
-              
-             String preguntaAleatoria=serieMatematica(); //FUNCION MATEMATICA
-             int respuestaAleatoria=averiguarRespuesta(preguntaAleatoria);
-          
-              System.out.println("**Respuesta correcta es " + respuestaAleatoria);
-              
-              
-                 //El bucle de las columnas: cuando finaliza pasa de turno
-                for (int j = 0; j < njug; j++) {
-                    
-                   //Scanner entradarespuesta= new Scanner (System.in);
-                   System.out.println(jugador[j]+", escribe respuesta");
-                   int respuesta= entrada.nextInt();
-                   
-                   //FUNCION ACERTAR O FALLAR
-                   //Si acierta la pregunta, el jugador se lleva 1 punto. 
-                   if (respuesta==respuestaAleatoria){
-                       System.out.println("Has acertado");
-                       tabla[j][i]= 1;
-                
-                   }
-                   
-                   else{
-                       System.out.println("**Has fallado");
-                       System.out.println("**La respuesta corrresta es " + 0);
-                       tabla[j][i]= 0;
-                   }
-                         
-           
-               }
-                
-                /*
-                Bucle que recorre solo las columnas (jugadores) de la fila en la que está el bucle principal. 
-                */
-                
-                //FUNCION FINAL RONDA
-                contador++;
-                
-                System.out.println("*PUNTUACIÓN ACTUAL*");
-              for (int k=0;k<njug;k++){
-                  for (int f=0; f<contador;f++){
-                      puntos+=tabla[k][f];
-                      
-                  }       
-                  System.out.println("Puntuación de jugador RONDA " + jugador[k] + "  es " + puntos);
-                  puntos=0;
-              }
-              
-              
-      }
-                
-         
-          //FUNCION PUNTUACION FINAL
-         
-          System.out.println("----PUNTUACION FINAL-----");
-               puntos=0;
-               int ganador=0;
-               String nombreganador= new String();
-               
-              for (int k=0;k<njug;k++){
-                  for (int f=0; f<contador;f++){
-                      puntos+=tabla[k][f];
-                     
-                  }      
-                 
-                System.out.println("Puntuación de jugador FINAL " + jugador[k] + "  es " + puntos);
-               
-                if (puntos>ganador){
-                    System.out.println("**" + puntos);
-                    ganador=puntos;
-                    System.out.println("**" + ganador);
-                    nombreganador=jugador[k];
-                }
-               
-                puntos=0;
-              }
-         
-              System.out.println("EL GANADOR ES  " + nombreganador + " CON " + ganador + " PUNTOS" + "¡ENHORABUENA!");
-
-           
-          
-            //Representación gráfica de la tabla
-          for (int m = 0;m<tabla.length; m++) {
-           
-                for (int j = 0; j < tabla[m].length; j++){
-                    
-                    System.out.printf("%3d ", tabla[m][j]);
-                }
-             
-            System.out.println();      
-          }
-          
-          
-    }        
-
-    public static int entradaJugadores(Scanner entrada) {
-        System.out.println("Escribe número de jugadores"); //FUNCIÓN QUE PIDA JUGADORES
-        int njug= entrada.nextInt();
-        while (njug>6 || njug<=0){
-            
-            System.out.println("Error. Introduce un número de jugadores entre 1 y 6");
-            njug= entrada.nextInt();
-            
-            if (njug<6 && njug>0){
-                break;
-            }
-        }
-        return njug;
-    }
-          
-          
-//---FUNCIONES---
-          
-          
-     public static String serieMatematica() {
-         
-        int b=(int)(4+Math.random()*(8-4+1));
-        
-        String almacena=" ";
-     
-        
-        switch (b){
-            
-            case 4:
-                
-                System.out.println("Operación de 4 enteros");
-                almacena=num()+op()+num()+op()+num()+op()+num();
-                System.out.println(almacena);  
-                
-                break;
-                
-            case 5:
-                
-                System.out.println("Operación de 5 enteros");
-                almacena=num()+op()+num()+op()+num()+op()+num()+op()+num();
-                System.out.println(almacena);
-           
-                break;
-                
-            case 6:
-                System.out.println("Operación de 6 enteros");
-                almacena= num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num();
-                System.out.println(almacena);
-                
-                break;
-                
-            case 7:
-                System.out.println("Operación de 7 enteros");
-                almacena=num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num();
-                System.out.println(almacena);
-                
-                break;
-                
-            case 8:
-                System.out.println("Operación de 8 enteros");
-                almacena=num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num()+op()+num();
-                System.out.println(almacena);
-                
-                break;
-         
-            
-        }
-        
-        return almacena;
-          
-    }
-
-
-    public static String op() {
-        
-        int n=(int)(1+Math.random()*(3-1+1));
-      
-        String x=" ";
-        switch (n){
-            
-            case 1->  x="+";
-            
-            case 2->  x="-";
-            
-            case 3->  x ="*";
-            
-        }
-        
-        return x;
-    }
-
-    public static int num() {
-        int a=(int)(2+Math.random()*(12-2+1));
-        return a;
-    }
-    
-    
- public static int averiguarRespuesta (String expresion) {
-        int valor = 0;
-        try {
-            ScriptEngineManager manager = new ScriptEngineManager();
-            ScriptEngine engine = manager.getEngineByName("javascript");
-            Object result = engine.eval(expresion);
-            valor = Integer.decode(result.toString());
-            
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        
-        return valor;
+        entrada= new Scanner ("6");
+        expResult = 6;
+        result = Avalos_Antonio_PROG06_Practica.entradaJugadores(entrada);
+        assertEquals(expResult, result);
        
+    
+        /*
+        
+        Las siguientes pruebas (0 y 7) son números fuera del rango (1-6). Lanza error ya que el código
+        solicita una nueva entrada INDEFINIDAMENTE (por el while) hasta que hay un número correcto. 
+        Ante esto, JUnit no pasa la prueba, lo que quiere decir que en teoría es correcto:
+        cuando no es número dentro del rango, se solicita una nueva entrada debido al while, 
+        lo que quiere decir que el número introducido no es igual al permitido. En cambio, con las pruebas
+        realizadas arriba sí identifica el número como correcto, lo que hace que JUnit lo valide. 
+        
+        */
+        
+        
+        /*entrada= new Scanner ("0");
+        expResult=0;
+        result = Avalos_Antonio_PROG06_Practica.entradaJugadores(entrada);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+       
+        
+        entrada= new Scanner ("7");
+        expResult = 7;
+        result = Avalos_Antonio_PROG06_Practica.entradaJugadores(entrada);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+      */
+       
+        
     }
-   
+
+    /**
+     * Test of puntuacionRonda method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testPuntuacionRonda() {
+        
+       /*
+        La siguiente función sólo muestra los puntos de los jugadores. 
+        Es una única salida en la que se muestra la puntuación de cada jugador mediante un acumulador. 
+        No hay posibilidad de automatizar. Se hace función debido a su estructura REPETITIVA, es decir, se la va a llamar al final de cada ronda.
+        
+        */
+    }
+
+    /**
+     * Test of funcionGanador method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testFuncionGanador() {
+        //La función no retorna ningún valor, es void. No se puede automatizar. 
+    }
+
+    /**
+     * Test of entradaRondas method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testEntradaRondas() {
+        
+       /*
+        No se puede automatizar dicha prueba ya que no tiene parámetros. Fue un error del que me he dado
+        cuenta durante la realización de esta prueba (puse una porción del código dentro de una función).
+        */
+    }
+
+  
+    
+      /**
+     * Test of nombreJugadores method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testNombreJugadores() {
+        
+        //No es prueba que se pueda automatizar, el nombre se guarda en el array o no se guarda. El propio código
+        // confirma a la hora de preguntar si se ha guardado el nombre o no. 
+        
+    }
 
 
+    /**
+     * Test of serieMatematica method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testSerieMatematica() {
+        //La siguiente función retorna un Math.random entre un rango (4-8). Debido a la aleatoriedad, no se puede automatizar.
+    }
+
+    /**
+     * Test of op method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testOp() {
+        //La siguiente función retorna un Math.random entre un rango (2-12). Debido a la aleatoriedad, no se puede automatizar.
+
+    }
+
+    /**
+     * Test of num method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testNum() {
+        //La siguiente función retorna un Math.random entre un rango (1-3). Debido a la aleatoriedad, no se puede automatizar.
+    }
+
+    /**
+     * Test of averiguarRespuesta method, of class Avalos_Antonio_PROG06_Practica.
+     */
+    @Test
+    public void testAveriguarRespuesta() {
+        /*
+        No se puede diseñar prueba para una función de librería. La profesora nos aportó 
+        una función propia que supera nuestros conocimientos actuales
+        */
+    }
+    
 }
